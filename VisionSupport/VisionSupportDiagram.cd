@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="VisionSupport.Terminal">
+    <Position X="5.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAQAgAAAAAAA=</HashCode>
+      <FileName>Terminal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_TerminalCollection">
+    <Position X="2.5" Y="1" Width="1.5" />
+    <NestedTypes>
+      <Class Name="_TerminalCollection._TerminalCollectionEnumerator" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>_TerminalCollection.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAACAABAQCAgAFAQgAAAAAAAEAAAhIABQIAA=</HashCode>
+      <FileName>_TerminalCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="VisionSupport.TerminalCollection">
+    <Position X="8.25" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TerminalCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

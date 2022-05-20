@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TcpSupport.TcpBase">
+    <Position X="4.75" Y="0.5" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="TcpSupport.TcpBase.TcpSendArgs" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>TcpBase.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="TcpSupport.TcpBase.TcpReceiveArgs" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>TcpBase.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ABCAAACBAAAAAAAAAEAAAQgAAAIAAAAQAAAAAQAIAAA=</HashCode>
+      <FileName>TcpBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TcpSupport.TcpClient">
+    <Position X="2.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>TcpClient.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TcpSupport.CustomTcpException">
+    <Position X="10" Y="0.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="TcpSupport.CustomTcpException.TaskInterupptByUser" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CustomTcpException.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomTcpException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TcpSupport.TcpServer">
+    <Position X="8" Y="7.25" Width="1.5" />
+    <NestedTypes>
+      <Class Name="TcpSupport.TcpServer.TcpServerEventArgs" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>TcpServer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AABgQAAAAAAAIAAAAACAAAgAEAAAAAAAAAACAgCAgAA=</HashCode>
+      <FileName>TcpServer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
