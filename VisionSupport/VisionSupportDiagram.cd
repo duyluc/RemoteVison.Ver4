@@ -8,7 +8,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="_TerminalCollection">
-    <Position X="2.5" Y="1" Width="1.5" />
+    <Position X="2.75" Y="0.5" Width="1.5" />
     <NestedTypes>
       <Class Name="_TerminalCollection._TerminalCollectionEnumerator" Collapsed="true">
         <TypeIdentifier>

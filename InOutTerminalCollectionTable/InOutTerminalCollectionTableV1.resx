@@ -117,34 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnCapture.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAApJJREFUWEft
-        lr2LU0EUxaNi47co6CJW2oiihbWIX3+ASMzHS0IIGhdhkQVREISwsH/Agp0Wgr1YyFYKsmAlNlaChYqI
-        2qq4m2wS/Z3ljnl5TvKSl2wh5MJhbmbOvee+N3fmJTWx/8qq1ermXC53NJ/Pn/RBa+IYfbwWBMEtRFYY
-        f8dgGd5NCxuPFQqFyyRuRYT6oUXMJQsf3Xii5yQcuADjPrPw4Yx93FssFs8imnYg2c+wwID4Ec6hnKVS
-        aY/J+E2vjcBl0AaNCHwiPUGuaHybQn4xXjS5bstmswchrDUZozfpKHA5pcGbOGCyHWOhCKEeDvIBXpun
-        c6dBb0uQr1i9uS6+B3VyBCbbMSZnWXTJekEiXyngWrlc3m+hKfnMT4NvxvHFOuiYzlpoxwYooAHnRTqd
-        3klDHcN/wNwbAf++LiEK2UVxS+JajA+JCmiCt4hvQ+AGvo5ZWKTBvOZmKpXKdsZ3QDHhHA7DF8CaOvgM
-        Ihf43XOfxWM8x3jefB8vUQGfxcF/DfpdSC24r6BuwP8SWXNItAWP2fetjLFdTp42H6Qt+E+ia4ahC5Do
-        Q+v06JoXNOQ+xkfAV3CiN7BEA25ijL2S6ZPvtVptI/7L6JohUQHq+B3gHrzV0HwUWlvQUe3DS1SAbq85
-        sBv/E0/5zznXHPiouwDePHOK6eIYEhUgNBE4BabwFzVHzKpg60/VJ+z/aTj9TkriAnTEdM1Oqx8QOczv
-        tU9tJpM5ZD1yHYizLgU4NOG+B9qSwDDH/AfGXrdfGP4CWLjKUw3yn8+hDl/7rn6I+wD9BeIrxFwx2Y7Z
-        Byb2ohkV0kDriMl2G5XdBdprVTlWWE79Wb1jcn6DcIJKZwi4PU4oJyfkuMlMbGJmqdQfOfGgvgEiZOEA
-        AAAASUVORK5CYII=
-</value>
-  </data>
-  <metadata name="dvCameraList_Name.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="dvCameraList_SerialNumber.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
 </root>

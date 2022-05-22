@@ -25,7 +25,7 @@
   <Class Name="TcpSupport.TcpClient">
     <Position X="2.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <HashCode>AAACAAAAAAAAQAAAAAAAAIAAAAAAAAIAAAAAAAAAAAQ=</HashCode>
       <FileName>TcpClient.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -49,15 +49,22 @@
   <Class Name="TcpSupport.TcpServer">
     <Position X="8" Y="7.25" Width="1.5" />
     <NestedTypes>
-      <Class Name="TcpSupport.TcpServer.TcpServerEventArgs" Collapsed="true">
+      <Enum Name="TcpSupport.TcpServer.Status" Collapsed="true">
         <TypeIdentifier>
           <NewMemberFileName>TcpServer.cs</NewMemberFileName>
         </TypeIdentifier>
-      </Class>
+      </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AABgQAAAAAAAIAAAAACAAAgAEAAAAAAAAAACAgCAgAA=</HashCode>
+      <HashCode>AABgQAAAAAAgIAAAAACAAAgAUAAAAAAAAAACIgCAgAA=</HashCode>
       <FileName>TcpServer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TcpSupport.Datacarrier">
+    <Position X="10.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Datacarrier.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
