@@ -106,6 +106,52 @@ namespace TcpSupport
             stopwatch.Stop();
             OnSended(tcpSocket, takttime);
         }
+
+        //public void Send(Socket tcpSocket, byte[] senddata)
+        //{
+        //    //Flag Status
+        //    bool _sendsuccess = false;
+        //    int _offset = 0;
+        //    int _count = 0;
+
+        //    //Estimate the time send process left
+        //    long takttime = 0;
+        //    Stopwatch stopwatch = Stopwatch.StartNew();
+        //    stopwatch.Start();
+        //    Thread _sendthread = new Thread(() =>
+        //    {
+        //        int _senddatalength = senddata.Length;
+        //        byte[] byte_senddatalength = BitConverter.GetBytes(_senddatalength);
+        //        tcpSocket.Send(byte_senddatalength);
+        //        Thread.Sleep(10);
+        //        while (true)
+        //        {
+        //            int readable = tcpSocket.Send(senddata, _offset, _senddatalength - _offset, SocketFlags.None);
+        //            _offset += readable;
+        //            if (_offset == _senddatalength) break;
+        //        }
+        //        _sendsuccess = true;
+        //    });
+        //    _sendthread.IsBackground = true;
+        //    _sendthread.Start();
+        //    while (_count < this.SendTimeout / 20 && !_sendsuccess)
+        //    {
+        //        Thread.Sleep(5);
+        //        _count++;
+        //    }
+        //    if (!_sendsuccess)
+        //    {
+        //        if (_sendthread.IsAlive)
+        //        {
+        //            _sendthread.Abort();
+        //        }
+        //        throw new TimeoutException("Send Processing");
+        //    }
+        //    takttime = stopwatch.ElapsedMilliseconds;
+        //    stopwatch.Stop();
+        //    OnSended(tcpSocket, takttime);
+        //}
+
         public void Send(Socket tcpSocket, byte[] senddata, out long takttime)
         {
             takttime = -99;

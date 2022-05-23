@@ -30,5 +30,12 @@
       <FileName>TerminalCollection.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="VisionSupport.DataCarrier">
+    <Position X="11" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>DataCarrier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

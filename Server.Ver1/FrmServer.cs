@@ -1,4 +1,4 @@
-﻿using LiteDB;
+﻿ using LiteDB;
 using System;
 using System.IO;
 using System.Linq;
@@ -132,7 +132,7 @@ namespace Server.Ver1
         }
         private void Server_Received(object sender, EventArgs e)
         {
-            Task _asyncReceiveTask
+            
         }
         private void Server_Accepted(object sender, EventArgs e)
         {

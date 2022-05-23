@@ -59,6 +59,21 @@ namespace Serialize
                 return ms.ToArray();
             }
         }
+        public static byte[] SerializeDataCarrerier(DataCarrier datacarrier, out long takttime)
+        {
+            takttime = 0;
+            if (datacarrier == null) return null;
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            BinaryFormatter bf = new BinaryFormatter();
+            using (MemoryStream ms = new MemoryStream())
+            {
+                bf.Serialize(ms, datacarrier);
+                sw.Stop();
+                takttime = sw.ElapsedMilliseconds;
+                return ms.ToArray();
+            }
+        }
         public static TerminalCollection DeserializeTerminalCollection(byte[] arrByte, out long takttime)
         {
             takttime = 0;
@@ -71,6 +86,23 @@ namespace Serialize
             ms.Write(arrByte, 0, arrByte.Length);
             ms.Seek(0, SeekOrigin.Begin);
             TerminalCollection ob = bf.Deserialize(ms) as TerminalCollection;
+
+            sw.Stop();
+            takttime = sw.ElapsedMilliseconds;
+            return ob;
+        }
+        public static DataCarrier DeserializeDataCarrerier(byte[] arrByte, out long takttime)
+        {
+            takttime = 0;
+            if (arrByte == null) return null;
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            MemoryStream ms = new MemoryStream();
+            BinaryFormatter bf = new BinaryFormatter();
+            ms.Write(arrByte, 0, arrByte.Length);
+            ms.Seek(0, SeekOrigin.Begin);
+            DataCarrier ob = bf.Deserialize(ms) as DataCarrier;
 
             sw.Stop();
             takttime = sw.ElapsedMilliseconds;

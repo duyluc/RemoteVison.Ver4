@@ -26,6 +26,7 @@ namespace Client.Ver1
         public TerminalCollection Output { get; set; }
         public TerminalCollection Input { get; set; }
         public TcpSupport.TcpClient Client { get; set; }
+        DataCarrier SendDataCarrier { get; set; }
         #endregion
         public FrmClient()
         {
@@ -287,8 +288,9 @@ namespace Client.Ver1
                     CameraDisplay.BackgroundImage = bitmap.Clone() as Bitmap;
                     Output.Clear();
                     Output.Add(new Terminal("Image", bitmap, typeof(Bitmap)));
+                    SendDataCarrier = new DataCarrier("0x01",Output);
                     long encodeOutput = 0;
-                    byte[] sendata = Serialize.Serialize.SerializeTerminalCollection(Output, out encodeOutput);
+                    byte[] sendata = Serialize.Serialize.SerializeDataCarrerier(SendDataCarrier, out encodeOutput);
                     CalTaktTime("Encode", encodeOutput, true);//->takt time
                     Client.Send(Client.Client, sendata);
                 }
