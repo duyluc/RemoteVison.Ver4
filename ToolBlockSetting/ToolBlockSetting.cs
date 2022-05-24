@@ -1,15 +1,18 @@
-﻿using LiteDB;
+﻿using Cognex.VisionPro.ToolBlock;
+using LiteDB;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ToolBlockInfoTable
+namespace VisionControl
 {
-    public partial class ToolBlockInfoTable : UserControl
+    public partial class ToolBlockSetting : UserControl
     {
         static private string _dBFolderPath = ".\\Database";
+        static private string _toolBlockFolderPath = ".\\ToolBlock";
+        public Dictionary<string, CogToolBlock> ToolBlocks { get; set; }
         public static string DBFolderPath
         {
             get
@@ -24,6 +27,20 @@ namespace ToolBlockInfoTable
                 _dBFolderPath = value;
             }
         }
+        public static string ToolBlockFolderPath
+        {
+            get
+            {
+                if (!Directory.Exists(_toolBlockFolderPath))
+                    Directory.CreateDirectory(_toolBlockFolderPath);
+                return _toolBlockFolderPath;
+            }
+
+            set
+            {
+                _toolBlockFolderPath = value;
+            }
+        }
         static public string DBFilePath { get; set; } = Path.Combine(DBFolderPath, "ToolBlockInfo.db");
         public class ToolBlockInfo
         {
@@ -31,25 +48,39 @@ namespace ToolBlockInfoTable
             public string ToolBlockID { get; set; }
             public string ToolBlockPath { get; set; }
         }
-        public ToolBlockInfoTable()
+        public ToolBlockSetting()
         {
             InitializeComponent();
             //ShowToolBlockInfos();
             Datagridview.ReadOnly = false;
             modifybutton(false);
         }
+        public void Show(List<ToolBlockInfo> infos,
+            Dictionary<string, CogToolBlock> Tools)
+        {
+            ShowToolBlockInfos(infos);
+            ToolBlocks = Tools;
+            //if (infos.Count != Tools.Count) throw new ArgumentException();
+        }
+        public void SetupControl(
+            List<ToolBlockInfo> infos,
+            Dictionary<string, CogToolBlock> Tools)
+        {
+            ShowToolBlockInfos(infos);
+            ToolBlocks = Tools;
+        }
         public void modifybutton(bool status)
         {
-            this.btnAccept.Visible = status;
-            this.btnCancel.Visible = status;
-            this.btnAdd.Visible = !status;
-            this.btnRemove.Visible = !status;
+            btnAccept.Visible = status;
+            btnCancel.Visible = status;
+            btnAdd.Visible = !status;
+            btnRemove.Visible = !status;
             if (Datagridview.RowCount == 0) return;
             Datagridview.Rows[Datagridview.RowCount - 1].ReadOnly = !status;
         }
         public bool VerifyRow(DataGridViewRow row)
         {
-            if(row == null) return false;
+            if (row == null) return false;
             if (row.Cells[0].Value == null) return false;
             if (string.IsNullOrEmpty(row.Cells[0].Value.ToString())) return false;
             return true;
@@ -58,21 +89,23 @@ namespace ToolBlockInfoTable
         private void btnAdd_Click(object sender, EventArgs e)
         {
             Datagridview.Rows.Add();
+            this.CogToolBlockEditer.Subject = new CogToolBlock();
             modifybutton(true);
         }
         private void btnRemove_Click(object sender, EventArgs e)
         {
             try
             {
-                if (this.Datagridview.SelectedRows.Count == 0) return;
-                int index = this.Datagridview.SelectedRows[0].Index;
+                if (Datagridview.SelectedRows.Count == 0) return;
+                int index = Datagridview.SelectedRows[0].Index;
                 DataGridViewRow row = Datagridview.SelectedRows[0];
                 if (RemoteToolBlockInfo(row.Cells[0].Value.ToString()))
                 {
                     Datagridview.Rows.Remove(row);
+                    this.ToolBlocks.Remove(row.Cells[0].Value.ToString());
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -88,14 +121,19 @@ namespace ToolBlockInfoTable
                 {
                     throw new ArgumentException("New row is invalid!");
                 }
+                CogToolBlock toolblock = this.CogToolBlockEditer.Subject;
+                if (toolblock == null) throw new ArgumentException("ToolBlock is NUll");
+                string toolblockpath = Path.Combine(ToolBlockFolderPath, row.Cells[0].Value.ToString() + ".vpp");
+                Cognex.VisionPro.CogSerializer.SaveObjectToFile(toolblock, toolblockpath);
                 ToolBlockInfo info = new ToolBlockInfo
                 {
                     ToolBlockID = row.Cells[0].Value.ToString(),
-                    ToolBlockPath = "test"
+                    ToolBlockPath = row.Cells[0].Value.ToString() + ".vpp"
                 };
+                this.ToolBlocks.Add(row.Cells[0].Value.ToString(), toolblock);
                 InsertToolBlockInfo(info);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Datagridview.Rows.RemoveAt(Datagridview.RowCount - 1);
                 MessageBox.Show(ex.Message);
@@ -174,5 +212,12 @@ namespace ToolBlockInfoTable
             }
         }
         #endregion
+
+        private void Datagridview_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            CogToolBlock toolblock = this.ToolBlocks[this.Datagridview.Rows[e.RowIndex].Cells[0].ToString()];
+            this.CogToolBlockEditer.Subject = toolblock;
+        }
     }
 }

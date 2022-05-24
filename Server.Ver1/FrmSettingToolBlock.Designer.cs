@@ -1,6 +1,6 @@
 ﻿namespace Server.Ver1
 {
-    partial class SettingToolBlock
+    partial class FrmSettingToolBlock
     {
         /// <summary>
         /// Required designer variable.
@@ -28,19 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.ToolBlockSettingControl = new ToolBlockSetting.ToolBlockSetting();
             this.SuspendLayout();
             // 
-            // SettingToolBlock
+            // ToolBlockSettingControl
+            // 
+            this.ToolBlockSettingControl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ToolBlockSettingControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ToolBlockSettingControl.Location = new System.Drawing.Point(0, 0);
+            this.ToolBlockSettingControl.Name = "ToolBlockSettingControl";
+            this.ToolBlockSettingControl.Size = new System.Drawing.Size(958, 536);
+            this.ToolBlockSettingControl.TabIndex = 0;
+            // 
+            // FrmSettingToolBlock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(958, 536);
-            this.Name = "SettingToolBlock";
+            this.Controls.Add(this.ToolBlockSettingControl);
+            this.Name = "FrmSettingToolBlock";
             this.Text = "SettingToolBlock";
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private ToolBlockSetting.ToolBlockSetting ToolBlockSettingControl;
     }
 }
