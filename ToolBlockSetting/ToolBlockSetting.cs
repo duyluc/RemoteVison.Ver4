@@ -215,6 +215,7 @@ namespace VisionControl
 
         private void Datagridview_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (btnAdd.Visible == false) return;
             if (e.RowIndex < 0) return;
             CogToolBlock toolblock = this.ToolBlocks[this.Datagridview.Rows[e.RowIndex].Cells[0].ToString()];
             this.CogToolBlockEditer.Subject = toolblock;

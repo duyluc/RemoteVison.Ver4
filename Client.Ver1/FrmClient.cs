@@ -288,7 +288,7 @@ namespace Client.Ver1
                     CameraDisplay.BackgroundImage = bitmap.Clone() as Bitmap;
                     Output.Clear();
                     Output.Add(new Terminal("Image", bitmap, typeof(Bitmap)));
-                    SendDataCarrier = new DataCarrier("0x01",Output);
+                    SendDataCarrier = new DataCarrier("0x01", Output);
                     long encodeOutput = 0;
                     byte[] sendata = Serialize.Serialize.SerializeDataCarrerier(SendDataCarrier, out encodeOutput);
                     CalTaktTime("Encode", encodeOutput, true);//->takt time
@@ -328,9 +328,9 @@ namespace Client.Ver1
         }
         private void Client_Received(object sender, EventArgs e)
         {
-            if (this.CameraDisplay.InvokeRequired)
+            if (CameraDisplay.InvokeRequired)
             {
-                this.CameraDisplay.BeginInvoke( new EventHandler<EventArgs>(Client_Received), sender, e);
+                CameraDisplay.BeginInvoke(new EventHandler<EventArgs>(Client_Received), sender, e);
                 return;
             }
             long receivetakttime = ((TcpSupport.TcpBase.TcpReceiveArgs)e).TaktTime;
@@ -340,12 +340,12 @@ namespace Client.Ver1
             if (receivedata.Length > 0)
             {
                 long deserializetime = 0;
-                Input = Serialize.Serialize.DeserializeTerminalCollection(receivedata,out deserializetime);
+                Input = Serialize.Serialize.DeserializeTerminalCollection(receivedata, out deserializetime);
                 CalTaktTime("Deserialize", deserializetime, true);
-                this.InputTerminalTable.SetValue2View(Input);
+                InputTerminalTable.SetValue2View(Input);
                 if (!Input.ContainsKey("Image")) return;
                 if (Input["Image"].Value == null) return;
-                this.CameraDisplay.BackgroundImage = (Input["Image"].Value as Bitmap).Clone() as Bitmap;
+                CameraDisplay.BackgroundImage = (Input["Image"].Value as Bitmap).Clone() as Bitmap;
             }
         }
         private void Client_Sended(object sender, EventArgs e)

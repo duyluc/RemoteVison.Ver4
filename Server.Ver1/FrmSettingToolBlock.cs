@@ -15,7 +15,7 @@ namespace Server.Ver1
     {
         Dictionary<string,CogToolBlock> ToolBlocks { get; set; }
         public FrmSettingToolBlock(
-            List<ToolBlockSetting.ToolBlockSetting.ToolBlockInfo> infos, 
+            List<VisionControl.ToolBlockSetting.ToolBlockInfo> infos, 
             Dictionary<string,CogToolBlock> Tools)
         {
             InitializeComponent();

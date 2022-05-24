@@ -34,23 +34,23 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lbServerStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.pageTeaching = new System.Windows.Forms.TabPage();
+            this.TeachingToolBlockControl = new VisionControl.ToolBlockSetting();
             this.pageSetting = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnOpenServer = new System.Windows.Forms.Button();
             this.lbIP = new System.Windows.Forms.Label();
             this.tbxIPAddress = new System.Windows.Forms.TextBox();
-            this.pageTeaching = new System.Windows.Forms.TabPage();
             this.IPAddressTable = new IpAddressTable.IpAddressTable();
-            this.TeachingToolBlockControl = new VisionControl.ToolBlockSetting();
             this.tabControl1.SuspendLayout();
             this.pageAuto.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.pageTeaching.SuspendLayout();
             this.pageSetting.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.pageTeaching.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -107,6 +107,26 @@
             this.lbServerStatus.Size = new System.Drawing.Size(55, 17);
             this.lbServerStatus.Text = "OFFLINE!";
             // 
+            // pageTeaching
+            // 
+            this.pageTeaching.Controls.Add(this.TeachingToolBlockControl);
+            this.pageTeaching.Location = new System.Drawing.Point(4, 22);
+            this.pageTeaching.Name = "pageTeaching";
+            this.pageTeaching.Size = new System.Drawing.Size(801, 431);
+            this.pageTeaching.TabIndex = 2;
+            this.pageTeaching.Text = "TEACHING";
+            this.pageTeaching.UseVisualStyleBackColor = true;
+            // 
+            // TeachingToolBlockControl
+            // 
+            this.TeachingToolBlockControl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.TeachingToolBlockControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TeachingToolBlockControl.Location = new System.Drawing.Point(0, 0);
+            this.TeachingToolBlockControl.Name = "TeachingToolBlockControl";
+            this.TeachingToolBlockControl.Size = new System.Drawing.Size(801, 431);
+            this.TeachingToolBlockControl.TabIndex = 0;
+            this.TeachingToolBlockControl.ToolBlocks = null;
+            // 
             // pageSetting
             // 
             this.pageSetting.Controls.Add(this.tableLayoutPanel2);
@@ -153,7 +173,7 @@
             this.btnOpenServer.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnOpenServer.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnOpenServer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenServer.Location = new System.Drawing.Point(230, 8);
+            this.btnOpenServer.Location = new System.Drawing.Point(227, 8);
             this.btnOpenServer.Name = "btnOpenServer";
             this.btnOpenServer.Size = new System.Drawing.Size(31, 23);
             this.btnOpenServer.TabIndex = 5;
@@ -177,16 +197,8 @@
             this.tbxIPAddress.Size = new System.Drawing.Size(184, 20);
             this.tbxIPAddress.TabIndex = 3;
             this.tbxIPAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // pageTeaching
-            // 
-            this.pageTeaching.Controls.Add(this.TeachingToolBlockControl);
-            this.pageTeaching.Location = new System.Drawing.Point(4, 22);
-            this.pageTeaching.Name = "pageTeaching";
-            this.pageTeaching.Size = new System.Drawing.Size(801, 431);
-            this.pageTeaching.TabIndex = 2;
-            this.pageTeaching.Text = "TEACHING";
-            this.pageTeaching.UseVisualStyleBackColor = true;
+            this.tbxIPAddress.Enter += new System.EventHandler(this.tbxIPAddress_Enter);
+            this.tbxIPAddress.Leave += new System.EventHandler(this.tbxIPAddress_Leave);
             // 
             // IPAddressTable
             // 
@@ -197,15 +209,6 @@
             this.IPAddressTable.Name = "IPAddressTable";
             this.IPAddressTable.Size = new System.Drawing.Size(266, 376);
             this.IPAddressTable.TabIndex = 2;
-            // 
-            // TeachingToolBlockControl
-            // 
-            this.TeachingToolBlockControl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.TeachingToolBlockControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TeachingToolBlockControl.Location = new System.Drawing.Point(0, 0);
-            this.TeachingToolBlockControl.Name = "TeachingToolBlockControl";
-            this.TeachingToolBlockControl.Size = new System.Drawing.Size(801, 431);
-            this.TeachingToolBlockControl.TabIndex = 0;
             // 
             // FrmServer
             // 
@@ -223,11 +226,11 @@
             this.tableLayoutPanel1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.pageTeaching.ResumeLayout(false);
             this.pageSetting.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.pageTeaching.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

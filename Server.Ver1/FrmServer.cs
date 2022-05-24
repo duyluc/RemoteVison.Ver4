@@ -64,19 +64,27 @@ namespace Server.Ver1
             this.IPAddressTable.TableChanged += IPAddressTable_TableChanged;
             //Load ToolBlock
             List<ToolBlockSetting.ToolBlockInfo> toolinfo = ToolBlockSetting.GetToolBlockInfos();
-            Dictionary<string, CogToolBlock> toolblocks = new Dictionary<string, CogToolBlock>(); ;
-            foreach(ToolBlockSetting.ToolBlockInfo info in toolinfo)
+            Dictionary<string, CogToolBlock> toolblocks = new Dictionary<string, CogToolBlock>();
+            List<ToolBlockSetting.ToolBlockInfo> removetool = new List<ToolBlockSetting.ToolBlockInfo>();
+            if(toolinfo.Count != 0)
             {
-                CogToolBlock tool;
-                try
+                foreach (ToolBlockSetting.ToolBlockInfo info in toolinfo)
                 {
-                   tool = CogSerializer.LoadObjectFromFile(info.ToolBlockPath) as CogToolBlock;
-                   toolblocks.Add(info.ToolBlockID, tool);
+                    CogToolBlock tool;
+                    try
+                    {
+                        tool = CogSerializer.LoadObjectFromFile(info.ToolBlockPath) as CogToolBlock;
+                        toolblocks.Add(info.ToolBlockID, tool);
+                    }
+                    catch
+                    {
+                        removetool.Add(info);
+                    }
                 }
-                catch
-                {
-                    toolinfo.Remove(info);
-                }
+            }
+            foreach (var re in removetool)
+            {
+                toolinfo.Remove(re);
             }
             this.TeachingToolBlockControl.SetupControl(toolinfo, toolblocks);
             //Load IPAddress
@@ -94,6 +102,8 @@ namespace Server.Ver1
                 }
             }
             tbxIPAddress.Text = ip;
+            //Load Accessable IP
+            this.AccessableIPs = this.IPAddressTable.GetIpList();
             //TCP
             // Initial Server
             Server = new TcpServer();
@@ -104,26 +114,59 @@ namespace Server.Ver1
             Server.Sended += Server_Sended;
             Server.ReceivedTimeouted += Server_ReceivedTimeouted;
             Server.SendTimeouted += Server_SendTimeouted;
+            if (string.IsNullOrEmpty(this.tbxIPAddress.Text)) return;
+            try
+            {
+                if (Server.ServerStatus == TcpServer.Status.Online)
+                {
+                    Server.Close();
+                }
+                else
+                {
+                    Task _openserver = Server.Open(GetServerEP());
+                }
+            }
+            catch (ArgumentException aex)
+            {
+                MessageBox.Show($"Invalid {aex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void IPAddressTable_TableChanged(object sender, EventArgs e)
         {
             lock (this.AccessableIPs)
             {
-                this.AccessableIPs = sender  as List<string>;
+                if (sender == null)
+                    this.AccessableIPs = new List<string>();
+                else this.AccessableIPs = sender  as List<string>;
             }
         }
 
         private void btnOpenServer_Click(object sender, EventArgs e)
         {
-            if (Server.ServerStatus == TcpServer.Status.Online)
+            try
             {
-                Server.Close();
+                if (Server.ServerStatus == TcpServer.Status.Online)
+                {
+                    Server.Close();
+                }
+                else
+                {
+                    Task _openserver = Server.Open(GetServerEP());
+                }
             }
-            else
+            catch(ArgumentException aex)
             {
-                Task _openserver = Server.Open(GetServerEP());
-            }        
+                MessageBox.Show($"Invalid {aex.Message}");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private void tbxIPAddress_Leave(object sender, EventArgs e)
         {
@@ -178,7 +221,8 @@ namespace Server.Ver1
         {
             lock (lbServerStatus)
             {
-                btnOpenServer.BackgroundImage = Properties.Resources.DisconnectIcon.ToBitmap();
+                btnOpenServer.BackgroundImage = Properties.Resources.ConnectIcon.ToBitmap();
+                this.tbxIPAddress.Invoke(new Action(() => { this.tbxIPAddress.Enabled = false; }));
                 lbServerStatus.Text = "ONLINE!";
             }
         }
@@ -186,7 +230,8 @@ namespace Server.Ver1
         {
             lock (lbServerStatus)
             {
-                btnOpenServer.BackgroundImage = Properties.Resources.ConnectIcon.ToBitmap();
+                btnOpenServer.BackgroundImage = Properties.Resources.DisconnectIcon.ToBitmap();
+                this.tbxIPAddress.Invoke(new Action(() => { this.tbxIPAddress.Enabled = true; }));
                 lbServerStatus.Text = "OFFLINE!";
             }
         }
@@ -209,10 +254,18 @@ namespace Server.Ver1
         }
         private void Server_Received(object sender, EventArgs e)
         {
-            TcpBase.TcpReceiveArgs receiveargs = (TcpBase.TcpReceiveArgs)e;
-            long receivetakttime = receiveargs.TaktTime;
-            byte[] receivedata = receiveargs.Data;
-            Socket client = receiveargs.TcpSocket;
+            try
+            {
+                TcpBase.TcpReceiveArgs receiveargs = (TcpBase.TcpReceiveArgs)e;
+                long receivetakttime = receiveargs.TaktTime;
+                byte[] receivedata = receiveargs.Data;
+                Socket client = receiveargs.TcpSocket;
+                Processing(client, receivedata);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
         private void Server_ReceivedTimeouted(object sender, EventArgs e)
@@ -268,23 +321,23 @@ namespace Server.Ver1
                             {
                                 tool.Inputs[_terminal.Name].Value = _terminal.Value;
                             }
-                            tool.Run();
-                            foreach(CogToolBlockTerminal outterminal in tool.Outputs)
-                            {
-                                if(outterminal.ValueType == typeof(ICogImage))
-                                {
-                                    Bitmap bitimage = (outterminal.Value as ICogImage).ToBitmap();
-                                    sendterminalcollection.Add(new Terminal(outterminal.Name,bitimage,typeof(Bitmap)));
-                                }
-                                else
-                                {
-                                    sendterminalcollection.Add(new Terminal(outterminal.Name, outterminal.Value, outterminal.ValueType));
-                                }
-                            }
-                            long serialtakttime = 0;
-                            byte[] senddata = Serialize.Serialize.SerializeTerminalCollection(sendterminalcollection, out serialtakttime);
-                            complete = true;
                         }
+                        tool.Run();
+                        foreach (CogToolBlockTerminal outterminal in tool.Outputs)
+                        {
+                            if (outterminal.ValueType.IsSubclassOf(typeof(ICogImage)))
+                            {
+                                Bitmap bitimage = (outterminal.Value as ICogImage).ToBitmap();
+                                sendterminalcollection.Add(new Terminal(outterminal.Name, bitimage, typeof(Bitmap)));
+                            }
+                            else
+                            {
+                                sendterminalcollection.Add(new Terminal(outterminal.Name, outterminal.Value, outterminal.ValueType));
+                            }
+                        }
+                        long serialtakttime = 0;
+                        byte[] senddata = Serialize.Serialize.SerializeTerminalCollection(sendterminalcollection, out serialtakttime);
+                        complete = true;
                     }
                     catch (Exception ex)
                     {
@@ -319,6 +372,5 @@ namespace Server.Ver1
             return data;
         }
         #endregion
-
     }
 }

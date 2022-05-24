@@ -8,24 +8,21 @@ namespace Test1
 {
     internal class Program
     {
-        [Flags]
-        public enum commnad
+        class testargs : EventArgs
         {
-            Regis,
-            None,
+            public string a = "ok";
+            public testargs()
+            {
+
+            }
         }
         static void Main(string[] args)
         {
-            commnad a = commnad.Regis & commnad.None;
-            if(a == commnad.Regis)
+            testargs test = new testargs();
+            if(typeof(testargs).IsSubclassOf(typeof(EventArgs)))
             {
-                Console.WriteLine("Regig");
+                Console.WriteLine("ok");
             }
-            if(a == commnad.None)
-            {
-                Console.WriteLine("None");
-            }
-            Console.WriteLine(a.ToString());
             Console.ReadKey();
         }
     }

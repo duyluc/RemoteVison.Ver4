@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ToolBlockSettingControl = new ToolBlockSetting.ToolBlockSetting();
+            this.ToolBlockSettingControl = new VisionControl.ToolBlockSetting();
             this.SuspendLayout();
             // 
             // ToolBlockSettingControl
@@ -54,6 +54,6 @@
 
         #endregion
 
-        private ToolBlockSetting.ToolBlockSetting ToolBlockSettingControl;
+        private VisionControl.ToolBlockSetting ToolBlockSettingControl;
     }
 }

@@ -42,6 +42,9 @@ namespace TcpSupport
         public void OnClosed()
         {
             ServerStatus = Status.Offline;
+            this.Server.Close();
+            this.Server.Dispose();
+            this.Server = null;
             Closed?.Invoke(this, EventArgs.Empty);
         }
         public void OnAccepted(Socket client)
@@ -90,7 +93,8 @@ namespace TcpSupport
                                     {
                                         this.Server.Close();
                                     }
-                                    InitialServer(ipaddress, port);
+                                    if (EnableServer)
+                                        InitialServer(ipaddress, port);
                                 }
                             }
                         }
@@ -157,7 +161,8 @@ namespace TcpSupport
                                     {
                                         this.Server.Close();
                                     }
-                                    InitialServer(serverep);
+                                    if(EnableServer)
+                                        InitialServer(serverep);
                                 }
                             }
                         }

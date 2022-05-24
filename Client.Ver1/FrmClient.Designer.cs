@@ -34,7 +34,6 @@
             this.pageHome = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.InputTerminalTable = new InOutTerminalCollectionTable.InOutTerminalCollectionTableV1();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnCapture = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -58,6 +57,7 @@
             this.dvCameraList = new System.Windows.Forms.DataGridView();
             this.dvCameraList_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dvCameraList_SerialNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InputTerminalTable = new InOutTerminalCollectionTable.InOutTerminalCollectionTableV1();
             this.tabcontrol1.SuspendLayout();
             this.pageHome.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -131,15 +131,6 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(311, 624);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
-            // InputTerminalTable
-            // 
-            this.InputTerminalTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.InputTerminalTable.Location = new System.Drawing.Point(2, 55);
-            this.InputTerminalTable.Margin = new System.Windows.Forms.Padding(2);
-            this.InputTerminalTable.Name = "InputTerminalTable";
-            this.InputTerminalTable.Size = new System.Drawing.Size(307, 212);
-            this.InputTerminalTable.TabIndex = 5;
-            // 
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -170,9 +161,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(218, 11);
+            this.button1.Location = new System.Drawing.Point(221, 11);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(31, 23);
+            this.button1.Size = new System.Drawing.Size(31, 25);
             this.button1.TabIndex = 2;
             this.button1.Text = "...";
             this.button1.UseVisualStyleBackColor = true;
@@ -383,6 +374,15 @@
             this.dvCameraList_SerialNumber.HeaderText = "Serial Number";
             this.dvCameraList_SerialNumber.Name = "dvCameraList_SerialNumber";
             this.dvCameraList_SerialNumber.ReadOnly = true;
+            // 
+            // InputTerminalTable
+            // 
+            this.InputTerminalTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.InputTerminalTable.Location = new System.Drawing.Point(2, 55);
+            this.InputTerminalTable.Margin = new System.Windows.Forms.Padding(2);
+            this.InputTerminalTable.Name = "InputTerminalTable";
+            this.InputTerminalTable.Size = new System.Drawing.Size(307, 212);
+            this.InputTerminalTable.TabIndex = 5;
             // 
             // FrmClient
             // 
