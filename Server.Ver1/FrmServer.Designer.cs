@@ -28,12 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmServer));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.pageAuto = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.lbServerStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.pageTeaching = new System.Windows.Forms.TabPage();
             this.TeachingToolBlockControl = new VisionControl.ToolBlockSetting();
             this.pageSetting = new System.Windows.Forms.TabPage();
@@ -43,10 +42,13 @@
             this.lbIP = new System.Windows.Forms.Label();
             this.tbxIPAddress = new System.Windows.Forms.TextBox();
             this.IPAddressTable = new IpAddressTable.IpAddressTable();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lbServerStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.RecordDisplay = new Cognex.VisionPro.CogRecordDisplay();
+            this.CogRecordDisplay = new Cognex.VisionPro.CogRecordDisplay();
             this.tabControl1.SuspendLayout();
             this.pageAuto.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.pageTeaching.SuspendLayout();
             this.pageSetting.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -62,7 +64,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(809, 457);
+            this.tabControl1.Size = new System.Drawing.Size(1042, 602);
             this.tabControl1.TabIndex = 0;
             // 
             // pageAuto
@@ -71,7 +73,7 @@
             this.pageAuto.Location = new System.Drawing.Point(4, 22);
             this.pageAuto.Name = "pageAuto";
             this.pageAuto.Padding = new System.Windows.Forms.Padding(3);
-            this.pageAuto.Size = new System.Drawing.Size(801, 431);
+            this.pageAuto.Size = new System.Drawing.Size(1034, 576);
             this.pageAuto.TabIndex = 0;
             this.pageAuto.Text = "AUTO";
             this.pageAuto.UseVisualStyleBackColor = true;
@@ -79,40 +81,23 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.00371F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.99629F));
-            this.tableLayoutPanel1.Controls.Add(this.statusStrip1, 0, 1);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 226F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.846828F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.15318F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(795, 425);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.070175F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.92982F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1028, 570);
             this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lbServerStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 403);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(262, 22);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // lbServerStatus
-            // 
-            this.lbServerStatus.Name = "lbServerStatus";
-            this.lbServerStatus.Size = new System.Drawing.Size(55, 17);
-            this.lbServerStatus.Text = "OFFLINE!";
             // 
             // pageTeaching
             // 
             this.pageTeaching.Controls.Add(this.TeachingToolBlockControl);
             this.pageTeaching.Location = new System.Drawing.Point(4, 22);
             this.pageTeaching.Name = "pageTeaching";
-            this.pageTeaching.Size = new System.Drawing.Size(801, 431);
+            this.pageTeaching.Size = new System.Drawing.Size(1034, 576);
             this.pageTeaching.TabIndex = 2;
             this.pageTeaching.Text = "TEACHING";
             this.pageTeaching.UseVisualStyleBackColor = true;
@@ -123,7 +108,7 @@
             this.TeachingToolBlockControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TeachingToolBlockControl.Location = new System.Drawing.Point(0, 0);
             this.TeachingToolBlockControl.Name = "TeachingToolBlockControl";
-            this.TeachingToolBlockControl.Size = new System.Drawing.Size(801, 431);
+            this.TeachingToolBlockControl.Size = new System.Drawing.Size(1034, 576);
             this.TeachingToolBlockControl.TabIndex = 0;
             this.TeachingToolBlockControl.ToolBlocks = null;
             // 
@@ -133,7 +118,7 @@
             this.pageSetting.Location = new System.Drawing.Point(4, 22);
             this.pageSetting.Name = "pageSetting";
             this.pageSetting.Padding = new System.Windows.Forms.Padding(3);
-            this.pageSetting.Size = new System.Drawing.Size(801, 431);
+            this.pageSetting.Size = new System.Drawing.Size(1034, 576);
             this.pageSetting.TabIndex = 1;
             this.pageSetting.Text = "SETTING";
             this.pageSetting.UseVisualStyleBackColor = true;
@@ -141,8 +126,8 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.21384F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.78616F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 274F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.IPAddressTable, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -151,7 +136,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.35294F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89.64706F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(795, 425);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1028, 570);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // panel1
@@ -162,7 +147,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(266, 37);
+            this.panel1.Size = new System.Drawing.Size(268, 53);
             this.panel1.TabIndex = 1;
             // 
             // btnOpenServer
@@ -205,16 +190,29 @@
             this.IPAddressTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.IPAddressTable.DbProvider = null;
             this.IPAddressTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.IPAddressTable.Location = new System.Drawing.Point(3, 46);
+            this.IPAddressTable.Location = new System.Drawing.Point(3, 62);
             this.IPAddressTable.Name = "IPAddressTable";
-            this.IPAddressTable.Size = new System.Drawing.Size(266, 376);
+            this.IPAddressTable.Size = new System.Drawing.Size(268, 505);
             this.IPAddressTable.TabIndex = 2;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(0, 548);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(339, 22);
+            this.statusStrip1.TabIndex = 1;
+            // 
+            // lbServerStatus
+            // 
+            this.lbServerStatus.Name = "lbServerStatus";
+            this.lbServerStatus.Size = new System.Drawing.Size(55, 17);
+            this.lbServerStatus.Text = "OFFLINE!";
             // 
             // FrmServer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(809, 457);
+            this.ClientSize = new System.Drawing.Size(1042, 602);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmServer";
@@ -223,9 +221,6 @@
             this.tabControl1.ResumeLayout(false);
             this.pageAuto.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.pageTeaching.ResumeLayout(false);
             this.pageSetting.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -238,10 +233,6 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage pageAuto;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel lbServerStatus;
         private System.Windows.Forms.TabPage pageSetting;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panel1;
@@ -251,6 +242,12 @@
         private System.Windows.Forms.TabPage pageTeaching;
         private IpAddressTable.IpAddressTable IPAddressTable;
         private VisionControl.ToolBlockSetting TeachingToolBlockControl;
+        private System.Windows.Forms.TabPage pageAuto;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private Cognex.VisionPro.CogRecordDisplay RecordDisplay;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lbServerStatus;
+        private Cognex.VisionPro.CogRecordDisplay CogRecordDisplay;
     }
 }
 

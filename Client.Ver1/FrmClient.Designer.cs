@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmClient));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabcontrol1 = new System.Windows.Forms.TabControl();
             this.pageHome = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.InputTerminalTable = new InOutTerminalCollectionTable.InOutTerminalCollectionTableV1();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnCapture = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -57,7 +58,9 @@
             this.dvCameraList = new System.Windows.Forms.DataGridView();
             this.dvCameraList_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dvCameraList_SerialNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.InputTerminalTable = new InOutTerminalCollectionTable.InOutTerminalCollectionTableV1();
+            this.pageTeaching = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.ModelTable = new ModelTable.ModelTableV1();
             this.tabcontrol1.SuspendLayout();
             this.pageHome.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -72,11 +75,14 @@
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvCameraList)).BeginInit();
+            this.pageTeaching.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabcontrol1
             // 
             this.tabcontrol1.Controls.Add(this.pageHome);
+            this.tabcontrol1.Controls.Add(this.pageTeaching);
             this.tabcontrol1.Controls.Add(this.pageCamera);
             this.tabcontrol1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabcontrol1.Location = new System.Drawing.Point(0, 0);
@@ -130,6 +136,15 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(311, 624);
             this.tableLayoutPanel3.TabIndex = 2;
+            // 
+            // InputTerminalTable
+            // 
+            this.InputTerminalTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.InputTerminalTable.Location = new System.Drawing.Point(2, 55);
+            this.InputTerminalTable.Margin = new System.Windows.Forms.Padding(2);
+            this.InputTerminalTable.Name = "InputTerminalTable";
+            this.InputTerminalTable.Size = new System.Drawing.Size(307, 212);
+            this.InputTerminalTable.TabIndex = 5;
             // 
             // panel4
             // 
@@ -345,14 +360,14 @@
             this.dvCameraList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dvCameraList_Name,
             this.dvCameraList_SerialNumber});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dvCameraList.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dvCameraList.DefaultCellStyle = dataGridViewCellStyle2;
             this.dvCameraList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dvCameraList.Location = new System.Drawing.Point(0, 0);
             this.dvCameraList.Name = "dvCameraList";
@@ -375,14 +390,41 @@
             this.dvCameraList_SerialNumber.Name = "dvCameraList_SerialNumber";
             this.dvCameraList_SerialNumber.ReadOnly = true;
             // 
-            // InputTerminalTable
+            // pageTeaching
             // 
-            this.InputTerminalTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.InputTerminalTable.Location = new System.Drawing.Point(2, 55);
-            this.InputTerminalTable.Margin = new System.Windows.Forms.Padding(2);
-            this.InputTerminalTable.Name = "InputTerminalTable";
-            this.InputTerminalTable.Size = new System.Drawing.Size(307, 212);
-            this.InputTerminalTable.TabIndex = 5;
+            this.pageTeaching.Controls.Add(this.tableLayoutPanel4);
+            this.pageTeaching.Location = new System.Drawing.Point(4, 22);
+            this.pageTeaching.Name = "pageTeaching";
+            this.pageTeaching.Padding = new System.Windows.Forms.Padding(3);
+            this.pageTeaching.Size = new System.Drawing.Size(1087, 636);
+            this.pageTeaching.TabIndex = 3;
+            this.pageTeaching.Text = "TEACHING";
+            this.pageTeaching.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 299F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Controls.Add(this.ModelTable, 0, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(1081, 630);
+            this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // ModelTable
+            // 
+            this.ModelTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ModelTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ModelTable.Location = new System.Drawing.Point(3, 3);
+            this.ModelTable.Name = "ModelTable";
+            this.tableLayoutPanel4.SetRowSpan(this.ModelTable, 2);
+            this.ModelTable.Size = new System.Drawing.Size(293, 624);
+            this.ModelTable.TabIndex = 0;
             // 
             // FrmClient
             // 
@@ -413,6 +455,8 @@
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dvCameraList)).EndInit();
+            this.pageTeaching.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -447,6 +491,9 @@
         private System.Windows.Forms.Button btnCapture;
         private System.Windows.Forms.PictureBox CameraDisplay;
         private TaktTimeTable.TaktTimeTableV1 TaktTable;
+        private System.Windows.Forms.TabPage pageTeaching;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private ModelTable.ModelTableV1 ModelTable;
     }
 }
 

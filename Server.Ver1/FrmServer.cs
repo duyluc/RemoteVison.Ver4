@@ -135,7 +135,6 @@ namespace Server.Ver1
                 MessageBox.Show(ex.Message);
             }
         }
-
         private void IPAddressTable_TableChanged(object sender, EventArgs e)
         {
             lock (this.AccessableIPs)
@@ -145,7 +144,6 @@ namespace Server.Ver1
                 else this.AccessableIPs = sender  as List<string>;
             }
         }
-
         private void btnOpenServer_Click(object sender, EventArgs e)
         {
             try

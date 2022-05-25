@@ -66,6 +66,9 @@
     <Reference Include="LMessageBox.Ver1">
       <HintPath>..\..\LUserWinformControl\LMessageBox.Ver1\bin\Release\LMessageBox.Ver1.dll</HintPath>
     </Reference>
+    <Reference Include="ModelTable">
+      <HintPath>..\ModelTable\obj\Debug\ModelTable.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime" />

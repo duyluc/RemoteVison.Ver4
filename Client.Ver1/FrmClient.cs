@@ -50,12 +50,16 @@ namespace Client.Ver1
                 }
             }
             tbxIPAddress.Text = ip;
+            
             //TCP
             Client = new TcpSupport.TcpClient();
             Client.Sended += Client_Sended;
             Client.Received += Client_Received;
             Client.Connected += Client_Connected;
-            //TCP
+
+            //Model Table
+            this.ModelTable.ShowModelInfo();
+
             Output = new TerminalCollection();
             btnCapture.Enabled = false;
             CameraManagement = new CameraManagement();

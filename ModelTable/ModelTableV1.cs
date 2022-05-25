@@ -1,18 +1,39 @@
-﻿using Cognex.VisionPro.ToolBlock;
-using LiteDB;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using LiteDB;
+using System.IO;
 
-namespace VisionControl
+namespace ModelTable
 {
-    public partial class ToolBlockSetting : UserControl
+    public partial class ModelTableV1 : UserControl
     {
+        #region Event
+        public event EventHandler Added;
+        public event EventHandler Removed;
+        public event EventHandler Selected;
+
+        protected void OnAdded(DataGridViewRow row)
+        {
+            Added?.Invoke(row, EventArgs.Empty);
+        }
+        protected void OnRemoved(DataGridViewRow row)
+        {
+            Removed?.Invoke(row, EventArgs.Empty);
+        }
+        protected void OnSelected(DataGridViewRow row)
+        {
+            Selected?.Invoke(row, EventArgs.Empty);
+        }
+
+        #endregion
         static private string _dBFolderPath = ".\\Database";
-        static private string _toolBlockFolderPath = ".\\ToolBlock";
-        public Dictionary<string, CogToolBlock> ToolBlocks { get; set; }
         public static string DBFolderPath
         {
             get
@@ -27,47 +48,27 @@ namespace VisionControl
                 _dBFolderPath = value;
             }
         }
-        public static string ToolBlockFolderPath
-        {
-            get
-            {
-                if (!Directory.Exists(_toolBlockFolderPath))
-                    Directory.CreateDirectory(_toolBlockFolderPath);
-                return _toolBlockFolderPath;
-            }
-
-            set
-            {
-                _toolBlockFolderPath = value;
-            }
-        }
-        static public string DBFilePath { get; set; } = Path.Combine(DBFolderPath, "ToolBlockInfo.db");
-        public class ToolBlockInfo
+        static public string DBFilePath { get; set; } = Path.Combine(DBFolderPath, "Model.db");
+        public class ModelInfo
         {
             public int Id { get; set; }
-            public string ToolBlockID { get; set; }
-            public string ToolBlockPath { get; set; }
+            public string Name { get; set; }
         }
-        public ToolBlockSetting()
+        public ModelTableV1()
         {
             InitializeComponent();
-            //ShowToolBlockInfos();
-            Datagridview.ReadOnly = false;
             modifybutton(false);
         }
-        public void Show(List<ToolBlockInfo> infos,
-            Dictionary<string, CogToolBlock> Tools)
+        public void SetupControl( List<ModelInfo> infos)
         {
-            ShowToolBlockInfos(infos);
-            ToolBlocks = Tools;
-            //if (infos.Count != Tools.Count) throw new ArgumentException();
-        }
-        public void SetupControl(
-            List<ToolBlockInfo> infos,
-            Dictionary<string, CogToolBlock> Tools)
-        {
-            ShowToolBlockInfos(infos);
-            ToolBlocks = Tools;
+            try
+            {
+                ShowModelInfo(infos);
+            }
+            catch
+            {
+
+            }
         }
         public void modifybutton(bool status)
         {
@@ -89,7 +90,6 @@ namespace VisionControl
         private void btnAdd_Click(object sender, EventArgs e)
         {
             Datagridview.Rows.Add();
-            this.CogToolBlockEditer.Subject = new CogToolBlock();
             modifybutton(true);
         }
         private void btnRemove_Click(object sender, EventArgs e)
@@ -102,7 +102,7 @@ namespace VisionControl
                 if (RemoveToolBlockInfo(row.Cells[0].Value.ToString()))
                 {
                     Datagridview.Rows.Remove(row);
-                    this.ToolBlocks.Remove(row.Cells[0].Value.ToString());
+                    OnRemoved(row);
                 }
             }
             catch (Exception ex)
@@ -121,17 +121,12 @@ namespace VisionControl
                 {
                     throw new ArgumentException("New row is invalid!");
                 }
-                CogToolBlock toolblock = this.CogToolBlockEditer.Subject;
-                if (toolblock == null) throw new ArgumentException("ToolBlock is NUll");
-                string toolblockpath = Path.Combine(ToolBlockFolderPath, row.Cells[0].Value.ToString() + ".vpp");
-                Cognex.VisionPro.CogSerializer.SaveObjectToFile(toolblock, toolblockpath);
-                ToolBlockInfo info = new ToolBlockInfo
+                ModelInfo info = new ModelInfo
                 {
-                    ToolBlockID = row.Cells[0].Value.ToString(),
-                    ToolBlockPath = Path.Combine(ToolBlockFolderPath, row.Cells[0].Value.ToString() + ".vpp")
-            };
-                this.ToolBlocks.Add(row.Cells[0].Value.ToString(), toolblock);
+                    Name = row.Cells[0].Value.ToString()
+                };
                 InsertToolBlockInfo(info);
+                OnAdded(row);
             }
             catch (Exception ex)
             {
@@ -146,44 +141,43 @@ namespace VisionControl
         }
         #endregion
         #region Database Provider
-        public void ShowToolBlockInfos()
+        public void ShowModelInfo()
         {
             if (Datagridview.InvokeRequired)
             {
-                Datagridview.BeginInvoke(new Action(ShowToolBlockInfos));
+                Datagridview.BeginInvoke(new Action(ShowModelInfo));
                 return;
             }
-            List<ToolBlockInfo> toolblockinfos = GetToolBlockInfos();
-            foreach (ToolBlockInfo info in toolblockinfos)
+            List<ModelInfo> infos = GetToolBlockInfos();
+            foreach (ModelInfo info in infos)
             {
                 Datagridview.Rows.Add();
-                Datagridview.Rows[Datagridview.RowCount - 1].Cells[0].Value = info.ToolBlockID;
+                Datagridview.Rows[Datagridview.RowCount - 1].Cells[0].Value = info.Name;
             }
         }
-        public void ShowToolBlockInfos(List<ToolBlockInfo> infos)
+        public void ShowModelInfo(List<ModelInfo> infos)
         {
             if (Datagridview.InvokeRequired)
             {
-                Datagridview.BeginInvoke(new Action(ShowToolBlockInfos));
+                Datagridview.BeginInvoke(new Action(ShowModelInfo));
                 return;
             }
-            //List<ToolBlockInfo> toolblockinfos = GetToolBlockInfos();
-            foreach (ToolBlockInfo info in infos)
+            foreach (ModelInfo info in infos)
             {
                 Datagridview.Rows.Add();
-                Datagridview.Rows[Datagridview.RowCount - 1].Cells[0].Value = info.ToolBlockID;
+                Datagridview.Rows[Datagridview.RowCount - 1].Cells[0].Value = info.Name;
             }
         }
-        static public List<ToolBlockInfo> GetToolBlockInfos()
+        static public List<ModelInfo> GetToolBlockInfos()
         {
-            List<ToolBlockInfo> toolblockinfos;
+            List<ModelInfo> toolblockinfos;
             using (LiteDatabase db = new LiteDatabase(DBFilePath))
             {
-                var col = db.GetCollection<ToolBlockInfo>();
+                var col = db.GetCollection<ModelInfo>();
                 toolblockinfos = col.FindAll().ToList();
                 if (toolblockinfos == null)
                 {
-                    toolblockinfos = new List<ToolBlockInfo>();
+                    toolblockinfos = new List<ModelInfo>();
                 }
             }
             return toolblockinfos;
@@ -193,20 +187,20 @@ namespace VisionControl
             if (string.IsNullOrEmpty(toolblockId)) throw new ArgumentNullException(nameof(toolblockId));
             using (LiteDatabase db = new LiteDatabase(DBFilePath))
             {
-                var col = db.GetCollection<ToolBlockInfo>();
-                ToolBlockInfo record = col.FindOne(x => x.ToolBlockID == toolblockId);
+                var col = db.GetCollection<ModelInfo>();
+                ModelInfo record = col.FindOne(x => x.Name == toolblockId);
                 if (record == null) return false;
                 col.Delete(record.Id);
                 return true;
             }
         }
-        static public void InsertToolBlockInfo(ToolBlockInfo record)
+        static public void InsertToolBlockInfo(ModelInfo record)
         {
             if (record == null) throw new ArgumentNullException(nameof(record));
             using (LiteDatabase db = new LiteDatabase(DBFilePath))
             {
-                var col = db.GetCollection<ToolBlockInfo>();
-                ToolBlockInfo checkrecord = col.FindOne(x => x.ToolBlockID == record.ToolBlockID);
+                var col = db.GetCollection<ModelInfo>();
+                ModelInfo checkrecord = col.FindOne(x => x.Name == record.Name);
                 if (checkrecord != null) throw new ArgumentException("ToolBlockInfo has already existed!");
                 col.Insert(record);
             }
@@ -217,9 +211,7 @@ namespace VisionControl
         {
             if (btnAdd.Visible == false) return;
             if (e.RowIndex < 0) return;
-            string key = this.Datagridview.Rows[e.RowIndex].Cells[0].Value.ToString();
-            CogToolBlock toolblock = this.ToolBlocks[key];
-            this.CogToolBlockEditer.Subject = toolblock;
+            OnSelected(Datagridview.Rows[e.RowIndex]);
         }
     }
 }
