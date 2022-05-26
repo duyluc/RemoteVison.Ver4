@@ -18,7 +18,6 @@ namespace ModelTable
         public event EventHandler Added;
         public event EventHandler Removed;
         public event EventHandler Selected;
-
         protected void OnAdded(DataGridViewRow row)
         {
             Added?.Invoke(row, EventArgs.Empty);
